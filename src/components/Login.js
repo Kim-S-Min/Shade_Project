@@ -148,7 +148,6 @@ export default function SignIn(props) {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
             className={classes.submit}
             ref={checkBtn}
           >

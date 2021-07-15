@@ -9,13 +9,13 @@ import Login from "./components/Login";
 import MovieDetailComponent from "./components/MovieDetailComponent";
 import MovieRecommendComponent from "./components/MovieRecommendComponent";
 // import Home from "./components/Home";
-import Mypage from "./components/Mypagetest";
+import Mypage from "./components/Mypage";
 import BoardUser from "./components/BoardUser";
 import BoardAdmin from "./components/BoardAdmin";
-import FrequentlyAskedQuestions from "./components/FrequentlyAskedQuestions";
+import FAQ from "./components/FAQ";
 import FindId from "./components/FindId";
 import FindPw from "./components/FindPw";
-import Headerbox from "./components/HeaderBox";
+import MovielistPlatform from "./components/movie/featrue/platformchoice/MovielistPlatform";
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
         <Grid item container> 
           <Grid item xs={12}>
             <Switch>
-              <Route exact path="/movielist" component = {MovieListComponent}></Route>
+              <Route exact path={["/", "/movielist"]} component = {MovieListComponent}></Route>
               <Route exact path="/moviedetail/:contents_id" component = {MovieDetailComponent}></Route>
               <Route exact path="/recommend" component = {MovieRecommendComponent}></Route>
               {/* <Route exact path={["/", "/home"]} component={Home} /> */}
@@ -36,10 +36,10 @@ function App() {
               <Route exact path="/mypage" component={Mypage} />
               <Route exact path="/user" component={BoardUser} />
               <Route exact path="/admin" component={BoardAdmin} />
-              <Route exact path="/faq" component={FrequentlyAskedQuestions}/>
+              <Route exact path="/faq" component={FAQ}/>
               <Route exact path="/findid" component={FindId}/>
               <Route exact path="/findpw" component={FindPw}/>
-              <Route exact path="/test" component={Headerbox}/>
+              <Route exact path="/test" component={MovielistPlatform}/>
             </Switch>
           </Grid> 
         </Grid>

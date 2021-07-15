@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AuthService from "../service/user/AuthService";
-import { AppBar, Button, CssBaseline, Toolbar, Typography, Link, InputBase, IconButton, Menu, MenuItem, Paper, Popper, Grow, MenuList, ClickAwayListener } from "@material-ui/core";
+import { AppBar, Button, CssBaseline, Toolbar, Typography, Link, InputBase, IconButton, Menu, MenuItem } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import styled from "styled-components";
 
@@ -22,7 +22,7 @@ const HeaderWrap = styled.div`
     height: 80px;
     transition: 0.4s ease;
     &.hide {
-        transform: translateY(-80px);
+        transform: translateY(-160px);
     }
 `;
 
@@ -36,8 +36,6 @@ const throttle = function (callback, waitTime) {
       }, waitTime);
   };
 };
-
-const menuWidth = 130;
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -96,12 +94,12 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: '12ch',
       '&:focus': {
-        width: '20ch',
+        width: '12ch',
       },
     },
   },
   menu: {
-    width: menuWidth,
+    width: "auto",
     flexShrink: 0
   },
   menuPaper: {
@@ -114,6 +112,9 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
     },
   },
+  iconButton: {
+    fontSize: 15,
+  },
 }));
 
 export default function Pricing() {
@@ -125,9 +126,6 @@ export default function Pricing() {
   const [hide, setHide] = useState(false);
   const [pageY, setPageY] = useState(0);
   const documentRef = useRef(document);
-  // const anchorRef = React.useRef(null);
-  // const [opan, setOpen] = React.useState(false);
-  //  open, opan은 메뉴의 중복을 피하기 위해서 입니다.
 
   const handleScroll = () => {
       const { pageYOffset } = window;
@@ -154,35 +152,6 @@ export default function Pricing() {
     }
 
   },[]);
-
-  // 목록메뉴
-  // const handleToggle = () => {
-  //   setOpen((prevOpan) => !prevOpan);
-  // };
-
-  // const handleListClose = (event) => {
-  //   if (anchorRef.current && anchorRef.current.contains(event.target)) {
-  //     return;
-  //   }
-
-  //   setOpen(false);
-  // };
-
-  // function handleListKeyDown(event) {
-  //   if (event.key === 'Tab') {
-  //     event.preventDefault();
-  //     setOpen(false);
-  //   }
-  // };
-
-  // const prevOpan = React.useRef(opan);
-  // React.useEffect(() => {
-  //   if (prevOpan.current === true && opan === false) {
-  //     anchorRef.current.focus();
-  //   }
-
-  //   prevOpan.current = opan;
-  // }, [opan]);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -241,42 +210,7 @@ export default function Pricing() {
                   TV
                 </Link>
               </Typography>
-              {/* 목록메뉴 */}
-              {/* <Typography variant="p" color="inherit" className={classes.toolbar}>
-                <Button
-                  ref={anchorRef}
-                  aria-controls={opan ? 'menu-list-grow' : undefined}
-                  aria-haspopup="true"
-                  onClick={handleToggle}
-                >
-                  목록
-                </Button>
-                <Popper open={opan} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-                  {({ TransitionProps, placement }) => (
-                    <Grow
-                      {...TransitionProps}
-                      style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                    >
-                      <Paper>
-                        <ClickAwayListener onClickAway={handleListClose}>
-                          <MenuList autoFocusItem={opan} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                            <MenuItem onClick={handleListClose}>
-                              <Button href={"/movielist"}>
-                                영화
-                              </Button>
-                            </MenuItem>
-                            <MenuItem onClick={handleListClose}>
-                              <Button href={"/dramalist"}>
-                                드라마
-                              </Button>
-                            </MenuItem>
-                          </MenuList>
-                        </ClickAwayListener>
-                      </Paper>
-                    </Grow>
-                  )}
-                </Popper>
-              </Typography> */}
+
             </div>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -300,6 +234,7 @@ export default function Pricing() {
                   aria-haspopup="true"
                   onClick={handleMenu}
                   color="inherit"
+                  className={classes.iconButton}
                 >
                   {currentUser.username}
                 </IconButton>
@@ -351,4 +286,3 @@ export default function Pricing() {
     </React.Fragment>
   );
 }
-

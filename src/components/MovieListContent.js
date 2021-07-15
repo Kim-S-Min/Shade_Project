@@ -1,10 +1,12 @@
 import React, { useRef, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Card, Grid, CardMedia, CardActionArea, AppBar, Toolbar, Typography, CssBaseline } from "@material-ui/core";
+import { Container, Card, Grid, CardMedia, CardActionArea, CssBaseline, useScrollTrigger, Fab, Zoom, Toolbar, AppBar, Typography } from "@material-ui/core";
 import ContentsService from "../service/ContentsService";
-import MovieDetailService from "../service/MovieDetailService";
-import MovieDetailComponent from "./MovieDetailComponent";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+// import MovieDetailService from "../service/MovieDetailService";
+// import MovieDetailComponent from "./MovieDetailComponent";
 // import Google from "../img/google";
 // import Naver from "../img/naver";
 // import Netflix from "../img/netflix";
@@ -13,7 +15,6 @@ import MovieDetailComponent from "./MovieDetailComponent";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
-    paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
   card: {
@@ -31,28 +32,57 @@ const useStyles = makeStyles((theme) => ({
       height: 285,
       width: "100%",
   },
-  dt: {
-    backgroundColor : "black",
-    padding: "5px",
-    position: "sticky",
-    margin: 0,
-    overflow: "auto",
-    opacity: 0.7,
-    float: "none",
-  },
+  pageup: {
+    position: "fixed",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2)
+  }
 }));
 
-export default function ContentList() {
+function ScrollTop(props) {
+  const { children, window } = props;
+  const classes = useStyles();
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100
+  });
+
+  const pageupClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      "#back-to-top-anchor"
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <div onClick={pageupClick} role="presentation" className={classes.pageup}>
+        {children}
+      </div>
+    </Zoom>
+  );
+}
+
+ScrollTop.propTypes = {
+  children: PropTypes.element.isRequired,
+  window: PropTypes.func
+};
+
+export default function ContentList(props) {
   const classes = useStyles();
   const [query] = useState('')
   const [pageNumber, setPageNumber] = useState(0)
   const [open, setOpen] = React.useState(false);
 
   const {
-      list,
-      hasMore,
-      loading,
-      error
+    list,
+    hasMore,
+    loading,
+    error
   } = ContentsService(query, pageNumber)
 
   const observer = useRef()
@@ -82,14 +112,9 @@ export default function ContentList() {
   return (
     <React.Fragment>
       <CssBaseline/>
-      <AppBar className={classes.dt}>
-        <Toolbar>
-          <Typography variant="h6" noWrap>
-            영화
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      {/* <Listplatform/> */}
       <main>
+      <Toolbar id="back-to-top-anchor" />
         <Container className={classes.cardGrid} maxWidth="lg">
           <Grid container spacing={1}>
             {list.map((l, index) => {
@@ -121,7 +146,11 @@ export default function ContentList() {
           </Grid>
         </Container>
       </main>
-
+      <ScrollTop {...props}>
+        <Fab color="grey" size="large" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
     </React.Fragment>
   );
 }

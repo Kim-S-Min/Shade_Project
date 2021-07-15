@@ -10,11 +10,13 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    marginTop: 65,
+    marginTop: 0,
+    position: "sticky"
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
+    position: "sticky"
   },
   drawerPaper: {
     width: drawerWidth,
@@ -111,7 +113,7 @@ function a11yProps(index) {
   };
 }
 
-export default function PermanentDrawerLeft() {
+export default function Mypage() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [open1, setOpen1] = React.useState(false);

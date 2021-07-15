@@ -144,7 +144,6 @@ export default function Join(props) {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
               className={classes.submit}
             >
               회원가입
