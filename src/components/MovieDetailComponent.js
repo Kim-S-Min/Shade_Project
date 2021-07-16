@@ -10,9 +10,6 @@ import Naver from "../img/naver.jpeg";
 import Wavve from "../img/wavve.jpeg";
 import Netflix from "../img/netflix.jpeg";
 import Watcha from "../img/watcha.jpeg";
-// import Hd from "../icons/hd.png";
-// import Sd from "../icons/sd.png";
-// import Kkkk from "../icons/kkkk.png";
 
 const useStyles = makeStyles((theme) => ({
   modal: {

@@ -15,7 +15,6 @@ import BoardAdmin from "./components/BoardAdmin";
 import FAQ from "./components/FAQ";
 import FindId from "./components/FindId";
 import FindPw from "./components/FindPw";
-import MovielistPlatform from "./components/movie/featrue/platformchoice/MovielistPlatform";
 
 function App() {
   return (
@@ -39,7 +38,6 @@ function App() {
               <Route exact path="/faq" component={FAQ}/>
               <Route exact path="/findid" component={FindId}/>
               <Route exact path="/findpw" component={FindPw}/>
-              <Route exact path="/test" component={MovielistPlatform}/>
             </Switch>
           </Grid> 
         </Grid>

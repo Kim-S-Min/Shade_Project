@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Container, Card, Grid, CardMedia, CardActionArea, CssBaseline, useScrollTrigger, Fab, Zoom, Toolbar, AppBar, Typography } from "@material-ui/core";
 import ContentsService from "../service/ContentsService";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import MovielistPlatform from "./movie/featrue/movielistplatform/MovielistPlatform"
 // import MovieDetailService from "../service/MovieDetailService";
 // import MovieDetailComponent from "./MovieDetailComponent";
 // import Google from "../img/google";
@@ -112,7 +113,7 @@ export default function ContentList(props) {
   return (
     <React.Fragment>
       <CssBaseline/>
-      {/* <Listplatform/> */}
+      <MovielistPlatform/>
       <main>
       <Toolbar id="back-to-top-anchor" />
         <Container className={classes.cardGrid} maxWidth="lg">
