@@ -27,7 +27,7 @@ function App() {
           <Grid item xs={12}>
             <Switch>
               <Route exact path={["/", "/movielist"]} component = {MovieListComponent}></Route>
-              <Route exact path="/moviedetail/:contents_id" component = {MovieDetailComponent}></Route>
+              {/* <Route exact path="/movielist/:contents_id" component = {MovieDetailComponent}></Route> */}
               <Route exact path="/recommend" component = {MovieRecommendComponent}></Route>
               {/* <Route exact path={["/", "/home"]} component={Home} /> */}
               <Route exact path="/login" component={Login} />

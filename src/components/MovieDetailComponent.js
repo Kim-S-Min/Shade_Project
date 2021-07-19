@@ -91,13 +91,13 @@ export default function MovieDetailComponent() {
     setAnchorEl(null);
   };
   
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   useEffect(() => {
     MovieDetailService.getMovieDetail(contents_id).then( res =>{
@@ -107,10 +107,10 @@ export default function MovieDetailComponent() {
     
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
+      {/* <button type="button" onClick={handleOpen}>
         Modal
-      </button>
-      <Modal
+      </button> */}
+      {/* <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
@@ -121,10 +121,10 @@ export default function MovieDetailComponent() {
         BackdropProps={{
           timeout: 500,
         }}
-      >
-        <Fade in={open}>
+      > */}
+        {/* <Fade in={open}>
         <Container maxWidth="md">
-            <Card className={classes.paper}> 
+            <Card className={classes.paper}>  */}
               <Grid item xs={12}>
                 <CardMedia className={classes.video}>
                   <iframe 
@@ -276,7 +276,7 @@ export default function MovieDetailComponent() {
                             <MenuItem
                               key={option}
                               selected={option === "Pyxis"}
-                              onClick={handleClose}
+                              onClick={menuHandleClose}
                             >
                               {option}
                             </MenuItem>
@@ -288,10 +288,10 @@ export default function MovieDetailComponent() {
                   </Grid>
                 </Grid>
               </Grid>
-            </Card>
+            {/* </Card>
           </Container>
-        </Fade>
-      </Modal>
+        </Fade> */}
+      {/* </Modal> */}
     </div>
   );
 }

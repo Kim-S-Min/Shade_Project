@@ -9,10 +9,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     marginTop: "2%",
   },
-  title: {
-    flexGrow: 1,
-    padding: theme.spacing(1),    
-  },
 }));
 
 export default function MovielistPlatform() {
@@ -22,11 +18,8 @@ export default function MovielistPlatform() {
     <div className={classes.grow}>
       <Container>
         <Toolbar>
-          <Typography variant="h2" className={classes.title}>
-            영화
-          </Typography>
+          <ArrayMenu/> 
           <Platformlist/>
-          <ArrayMenu/>
         </Toolbar>
       </Container>
     </div>
