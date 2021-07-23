@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Backdrop, Fade, Card, CardMedia, Grid, Container, Toolbar, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, InputAdornment, Button, List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography, IconButton, Menu, MenuItem } from "@material-ui/core";
+import { Modal, Backdrop, Fade, Card, CardMedia, Grid, Container, 
+  Toolbar, Box, Table, TableBody, TableCell, TableContainer, TableHead, 
+  TableRow, Paper, TextField, InputAdornment, Button, List, ListItem, 
+  ListItemAvatar, Avatar, ListItemText, Typography, IconButton, Menu, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -78,7 +81,7 @@ const options = [
 export default function MovieDetailComponent() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const {contents_id} = useParams()
+  // const {contents_id} = useParams()
   const [movieDetail,setMovieDetail] = useState({})
   const [anchorEl, setAnchorEl] = React.useState(null);
   const menuopen = Boolean(anchorEl);
@@ -90,27 +93,23 @@ export default function MovieDetailComponent() {
   const menuHandleClose = () => {
     setAnchorEl(null);
   };
-  
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
 
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-  useEffect(() => {
-    MovieDetailService.getMovieDetail(contents_id).then( res =>{
-        setMovieDetail(res.data)
-    })
-    },[])
+  // useEffect(() => {
+  //   MovieDetailService.getMovieDetail(contents_id).then( res =>{
+  //       setMovieDetail(res.data)
+  //   });
+  //   },[])
     
   return (
     <div>
       {/* <button type="button" onClick={handleOpen}>
         Modal
       </button> */}
-      {/* <Modal
+      <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
@@ -121,10 +120,10 @@ export default function MovieDetailComponent() {
         BackdropProps={{
           timeout: 500,
         }}
-      > */}
-        {/* <Fade in={open}>
+      >
+        <Fade in={open}>
         <Container maxWidth="md">
-            <Card className={classes.paper}>  */}
+            <Card className={classes.paper}> 
               <Grid item xs={12}>
                 <CardMedia className={classes.video}>
                   <iframe 
@@ -288,10 +287,10 @@ export default function MovieDetailComponent() {
                   </Grid>
                 </Grid>
               </Grid>
-            {/* </Card>
+            </Card>
           </Container>
-        </Fade> */}
-      {/* </Modal> */}
+        </Fade>
+      </Modal>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import styled from "styled-components";
 const HeaderArea = styled.div`
     position: relative;
     width: 100%;
-    height: 65px;
+    height: 40px;
     overflow: auto;
 `;
 //  height 값을 

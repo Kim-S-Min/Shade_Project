@@ -4,11 +4,11 @@ import { blue, blueGrey, grey } from "@material-ui/core/colors"
 const theme = createMuiTheme({
   palette: {
     // primary: {
-    //     main: grey[400],
+    //     main: blue[400],
     // },
-    secondary: {
-        main: blueGrey[200],
-    },
+    // secondary: {
+    //     main: blueGrey[200],
+    // },
   },
   // status: {
   //     danger: "orange"
