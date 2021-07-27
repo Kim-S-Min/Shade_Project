@@ -8,14 +8,12 @@ import { Container, Card, Grid, CardMedia, CardActionArea,
   Box, Table, TableBody, TableCell, TableContainer, 
   TableHead, TableRow, Paper, TextField, InputAdornment, 
   List, ListItem, ListItemText, IconButton, Menu, MenuItem} from "@material-ui/core";
-import ContentsService from "../service/ContentsService";
+import ContentsService from "../service/contents/ContentsService";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import MovielistPlatform from "./movie/featrue/movielistplatform/MovielistPlatform"
-import MovieDetailService from "../service/MovieDetailService";
+import MovieDetailService from "../service/movie/MovieDetailService";
 import LikeDislikes from "./movie/featrue/likedislikes/LikeDislikes";
 
 import Google from "../img/google.jpeg";

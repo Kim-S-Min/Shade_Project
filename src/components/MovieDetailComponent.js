@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { useParams } from "react-router-dom";
-import MovieDetailService from "../service/MovieDetailService";
+import MovieDetailService from "../service/movie/MovieDetailService"
 import Google from "../img/google.jpeg";
 import Naver from "../img/naver.jpeg";
 import Wavve from "../img/wavve.jpeg";

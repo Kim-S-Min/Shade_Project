@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import MovieListComponent from "./components/MovieListContent";
 import Join from "./components/Join";
 import Login from "./components/Login";
-import MovieDetailComponent from "./components/MovieDetailComponent";
+// import MovieDetailComponent from "./components/MovieDetailComponent";
 import MovieRecommendComponent from "./components/MovieRecommendComponent";
 // import Home from "./components/Home";
 import Mypage from "./components/Mypage";

@@ -39,7 +39,7 @@ export default function Platformlist() {
     const [wav, setWavve] = useState(1);
 
     const Click1 = () => {
-        if (net != 1) {
+        if (net !== 1) {
             setNetflix(net + 1);
             console.log("on Netflix");
         } else {
@@ -49,7 +49,7 @@ export default function Platformlist() {
     }
     
     const Click2 = () => {
-        if (wat != 1) {
+        if (wat !== 1) {
             setWatcha(wat + 1);
             console.log("on Watcha");
         } else {
@@ -59,7 +59,7 @@ export default function Platformlist() {
     }
 
     const Click3 = () => {
-        if (goo != 1) {
+        if (goo !== 1) {
             setGoogle(goo + 1);
             console.log("on Google");
         } else {
@@ -69,7 +69,7 @@ export default function Platformlist() {
     }
 
     const Click4 = () => {
-        if (nav != 1) {
+        if (nav !== 1) {
             setNaver(nav + 1);
             console.log("on Naver");
         } else {
@@ -79,7 +79,7 @@ export default function Platformlist() {
     }
 
     const Click5 = () => {
-        if (wav != 1) {
+        if (wav !== 1) {
             setWavve(wav + 1);
             console.log("on Wavve");
         } else {
@@ -89,7 +89,7 @@ export default function Platformlist() {
     }
 
     useEffect(() => {
-        if (net + wat + goo + nav + wav == 0) {
+        if (net + wat + goo + nav + wav === 0) {
             console.log("초기화");
             setNetflix(net + 1);
             setWatcha(wat + 1);

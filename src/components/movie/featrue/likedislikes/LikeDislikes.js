@@ -64,7 +64,7 @@ export default function LikeDislikes(props) {
             console.log("Dislike");
           }
         } else {
-          alert('Like를 올리지 못했습니다.');
+          // alert('Like를 올리지 못했습니다.');
         }
       });
     } else {
@@ -73,7 +73,7 @@ export default function LikeDislikes(props) {
           setLikes(Likes === '');
           setLikeAction('');
         } else {
-          alert('Like를 내리지 못했습니다.');
+          // alert('Like를 내리지 못했습니다.');
         }
       });
     }
@@ -86,7 +86,7 @@ export default function LikeDislikes(props) {
           setDislikes(Dislikes - 1);
           setDisLikeAction('');
         } else {
-          alert('dislike를 지우지 못했습니다.');
+          // alert('dislike를 지우지 못했습니다.');
         }
       });
     } else {
@@ -100,7 +100,7 @@ export default function LikeDislikes(props) {
             setLikes(Likes - 1);
           }
         } else {
-          alert('dislike를 올리지 못했습니다.');
+          // alert('dislike를 올리지 못했습니다.');
         }
       });
     }
@@ -109,25 +109,23 @@ export default function LikeDislikes(props) {
   return (
     <div>
       <span key="comment-basic-like">
-        <IconButton title="Like">
+        <IconButton title="Like" onClick={onLike}>
           {LikeAction === '' ? (
-            <ThumbUpIcon color="primary" onClick={onLike} />
+            <ThumbUpIcon color="primary"  />
             ) : (
-            <ThumbUpIcon onClick={onLike} />
+            <ThumbUpIcon  />
           )}
         </IconButton>
-        <span style={{ paddingLeft: '4px', cursor: 'auto' }}> {Likes}</span>
       </span>
 
       <span key="comment-basic-dislike" style={{ marginLeft: '4px' }}>
-        <IconButton title="Dislike">
+        <IconButton title="Dislike" onClick={onDislike} >
           {DisLikeAction === '' ? (
-            <ThumbDownIcon color="secondary" onClick={onDislike} />
+            <ThumbDownIcon color="secondary"  />
           ) : (
-            <ThumbDownIcon onClick={onDislike}/>
+            <ThumbDownIcon />
           )}
         </IconButton>
-        <span style={{ paddingLeft: '4px', cursor: 'auto' }}> {Dislikes}</span>
       </span>
     </div>
   );
