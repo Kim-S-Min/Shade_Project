@@ -9,11 +9,10 @@ import CheckButton from "react-validation/build/button";
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    minHeight: '60vh',
+    minHeight: '130vh',
 
   },
   avatar: {
@@ -246,6 +245,7 @@ export default function Join(props) {
             </Button>
             </Grid>
             )}
+            {/* 필수! 프로젝트 완성 전에 오류 메세지 삭제!! */}
             {message && (
               <div className="form-group">
                 <div
@@ -256,6 +256,7 @@ export default function Join(props) {
                 </div>
               </div>
             )}
+            {/* 프로젝트 완성 전에 오류 메세지 삭제!! */}
 
             <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>

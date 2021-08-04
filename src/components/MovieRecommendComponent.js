@@ -47,6 +47,12 @@ const useStyles = makeStyles((theme) => ({
       height: 225,
       width: "100%",
   },
+  main: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    minHeight: '100vh',
+  }
 }));
 
 function SampleNextArrow(props) {
@@ -115,7 +121,7 @@ export default function MovieRecommendComponent() {
     ]
   };
     return (
-      <div>
+      <div className={classes.main}>
         <Container className={classes.cardGrid} maxWidth="lg">
         <div>
         <h3>영화 추천</h3>

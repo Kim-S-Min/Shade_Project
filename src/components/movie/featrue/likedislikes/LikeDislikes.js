@@ -1,10 +1,26 @@
 import React, {useState, useEffect} from "react";
 import Axios from "axios";
+import { makeStyles } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import { grey } from "@material-ui/core/colors"
+
+const useStyles = makeStyles((theme) => ({
+  likebox: {
+    display: "flex",
+    justifyContent: "space-around",
+  },
+  page: {
+    backgroundColor: grey[900]
+  },
+  like: {
+    color: grey[500]
+  }
+}))
 
 export default function LikeDislikes(props) {
+  const classes = useStyles();
   const [Likes, setLikes] = useState(0)
   const [Dislikes, setDislikes] = useState(0)
   const [LikeAction, setLikeAction] = useState(null)
@@ -107,26 +123,26 @@ export default function LikeDislikes(props) {
   };
 
   return (
-    <div>
-      <span key="comment-basic-like">
+    <div className={classes.page}>
+      <div className={classes.likebox}>
         <IconButton title="Like" onClick={onLike}>
           {LikeAction === '' ? (
             <ThumbUpIcon color="primary"  />
             ) : (
-            <ThumbUpIcon  />
+            <ThumbUpIcon className={classes.like} />
           )}
         </IconButton>
-      </span>
+      
+      
 
-      <span key="comment-basic-dislike" style={{ marginLeft: '4px' }}>
-        <IconButton title="Dislike" onClick={onDislike} >
+        <IconButton title="Dislike" onClick={onDislike}>
           {DisLikeAction === '' ? (
             <ThumbDownIcon color="secondary"  />
           ) : (
-            <ThumbDownIcon />
+            <ThumbDownIcon className={classes.like}/>
           )}
         </IconButton>
-      </span>
+      </div>
     </div>
   );
 }

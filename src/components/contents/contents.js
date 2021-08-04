@@ -1,4 +1,4 @@
-import Contents from "../../service/Contents"
+import Contents from "../../service/contents/Contents"
 
 export default function ContentsComponent() {
 

@@ -8,11 +8,11 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { useParams } from "react-router-dom";
 import MovieDetailService from "../service/movie/MovieDetailService"
-import Google from "../img/google.jpeg";
-import Naver from "../img/naver.jpeg";
-import Wavve from "../img/wavve.jpeg";
-import Netflix from "../img/netflix.jpeg";
-import Watcha from "../img/watcha.jpeg";
+import Google from "../img/platform/on/google.jpeg";
+import Naver from "../img/platform/on/naver.jpeg";
+import Wavve from "../img/platform/on/wavve.jpeg";
+import Netflix from "../img/platform/on/netflix.jpeg";
+import Watcha from "../img/platform/on/watcha.jpeg";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -64,12 +64,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function createData(naver, google, wavve, netflix, watcha) {
-  return { naver, google, wavve, netflix, watcha };
+function createData(플랫폼, 구매, 대여, 정액제) {
+  return { 플랫폼, 구매, 대여, 정액제  };
 }
 
 const rows = [
-  createData("SD HD 4K", "SD HD 4K", "SD HD 4K", "", ""),
+  createData("네이버", "SD HD 4K", "SD HD 4K", "", ""),
   createData("SD HD 4K", "SD HD 4K", "SD HD 4K", "", ""),
   createData("", "", "정액제", "정액제", "정액제"),
 ];
@@ -98,6 +98,9 @@ export default function MovieDetailComponent() {
     setOpen(false);
   };
 
+  const handleOpen = () => {
+    setOpen(true);
+  }
   // useEffect(() => {
   //   MovieDetailService.getMovieDetail(contents_id).then( res =>{
   //       setMovieDetail(res.data)
@@ -106,9 +109,9 @@ export default function MovieDetailComponent() {
     
   return (
     <div>
-      {/* <button type="button" onClick={handleOpen}>
+      <button type="button" onClick={handleOpen}>
         Modal
-      </button> */}
+      </button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

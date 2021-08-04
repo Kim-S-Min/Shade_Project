@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function ExContentsService(query, pageNumber) {
+export default function ContentsService(query, pageNumber) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [list, setList] = useState([]);

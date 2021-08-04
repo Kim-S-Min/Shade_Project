@@ -3,11 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Container, Toolbar } from "@material-ui/core";
 import ArrayMenu from "./part/ArrayMenu";
 import Platformlist from "./part/Platformlist";
+import { grey } from "@material-ui/core/colors"
 
 const useStyles = makeStyles((theme) => ({
   grow: {
-    flexGrow: 1,
-    marginTop: "2%",
+    display: "flex",
+    flexWrap: "wrap",
+    paddingTop: 10,
+    backgroundColor: grey[900],
   },
 }));
 
@@ -17,7 +20,7 @@ export default function MovielistPlatform() {
   return (
     <div className={classes.grow}>
       <Container>
-        <Toolbar>
+        <Toolbar display="flex" flexWrap="wrap">
           <ArrayMenu/> 
           <Platformlist/>
         </Toolbar>

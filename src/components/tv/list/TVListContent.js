@@ -33,22 +33,28 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  NativeSelect,
+  FormControl,
+  AccordionSummary,
+  AccordionDetails,
+  Accordion,
 } from "@material-ui/core";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CloseIcon from "@material-ui/icons/Close";
 import { grey } from "@material-ui/core/colors";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import ContentsService from "../service/contents/ContentsService";
-import MovielistPlatform from "./movie/featrue/movielistplatform/MovielistPlatform";
-import MovieDetailService from "../service/movie/MovieDetailService";
-import LikeDislikes from "./movie/featrue/likedislikes/LikeDislikes";
+import ContentsService from "../../../service/contents/ContentsService";
+import MovielistPlatform from "../../movie/featrue/movielistplatform/MovielistPlatform";
+import MovieDetailService from "../../../service/movie/MovieDetailService";
+import LikeDislikes from "../../movie/featrue/likedislikes/LikeDislikes";
 
-import Google from "../img/platform/on/google.jpeg";
-import Naver from "../img/platform/on/naver.jpeg";
-import Wavve from "../img/platform/on/wavve.jpeg";
-import Netflix from "../img/platform/on/netflix.jpeg";
-import Watcha from "../img/platform/on/watcha.jpeg";
+import Google from "../../../img/platform/on/google.jpeg";
+import Naver from "../../../img/platform/on/naver.jpeg";
+import Wavve from "../../../img/platform/on/wavve.jpeg";
+import Netflix from "../../../img/platform/on/netflix.jpeg";
+import Watcha from "../../../img/platform/on/watcha.jpeg";
 
 const useStyles = makeStyles((theme) => ({
   //  리스트 페이지
@@ -140,21 +146,43 @@ const useStyles = makeStyles((theme) => ({
   },
   tilike: {
     display: "flex",
-    justifyContent: "space-between",
-    width: "100%",
   },
   title: {
-    // flex: 1,
+    flexGrow: 1,
   },
   like: {
     paddingTop: 15,
     float: "right",
-    // flex: 1,
   },
   close: {
     color: grey[100],
   },
-  tablebody: {
+  arrayMenu: {
+    flexGrow: 1,
+  },
+  formControl: {
+    padding: theme.spacing(1),
+    minWidth: 120,
+    boxShadow: theme.shadows[5],
+    borderRadius: "10px",
+  },
+  selectEmpty: {
+    color: grey[100],
+  },
+  episodepage: {
+    width: "100%",
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: "33.33%",
+    flexShrink: 0,
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+  },
+  episode: {
+    backgroundColor: grey[900],
     color: grey[100],
   },
 }));
@@ -165,9 +193,20 @@ function createData(구매정보, naver, google, wavve, netflix, watcha) {
 }
 
 const rows = [
-  createData("대여", "SD HD 4K", "SD HD 4K", "SD HD 4K", "", ""),
+  createData("구매", "", "SD HD 4K", "SD HD 4K", "", ""),
   createData("대여", "SD HD 4K", "SD HD 4K", "SD HD 4K", "", ""),
   createData("정액제", "", "", "정액제", "정액제", "정액제"),
+];
+
+// 에피소드 요금정보 데이터
+function episodeData(구매정보, naver, google, wavve, netflix, watcha) {
+  return { 구매정보, naver, google, wavve, netflix, watcha };
+}
+
+const episoderows = [
+  episodeData("구매", "", "SD HD 4K", "SD HD 4K", "", ""),
+  episodeData("대여", "SD HD 4K", "SD HD 4K", "SD HD 4K", "", ""),
+  episodeData("정액제", "", "", "정액제", "정액제", "정액제"),
 ];
 
 const options = ["신고", "수정", "삭제"];
@@ -214,6 +253,23 @@ export default function ContentList(props) {
   const [movieDetail, setMovieDetail] = useState({});
   const [anchorEl, setAnchorEl] = React.useState(null);
   const menuopen = Boolean(anchorEl);
+  const [expanded, setExpanded] = React.useState(false);
+  const [state, setState] = React.useState({
+    age: "",
+    name: "hai",
+  });
+
+  const handleChange1 = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    setState({
+      ...state,
+      [name]: event.target.value,
+    });
+  };
 
   //  리스트 무한스크롤 (ContentsService, lastPageElementRef)
   const { list, hasMore, loading, error } = ContentsService(query, pageNumber);
@@ -293,13 +349,10 @@ export default function ContentList(props) {
                                 {/* 유튜브 영상 */}
                                 <iframe
                                   className={classes.iframe}
-                                  // src={
-                                  //   "https://www.youtube.com/embed/" +
-                                  //   movieDetail.video +
-                                  //   "?autoplay=1"
-                                  // }
                                   src={
-                                    "https://www.youtube.com/embed/IJiHDmyhE1A?autoplay=1"
+                                    "https://www.youtube.com/embed/" +
+                                    movieDetail.video +
+                                    "?autoplay=1"
                                   }
                                   title="YouTube video player"
                                   frameborder="0"
@@ -319,8 +372,6 @@ export default function ContentList(props) {
                                     <div>
                                       <Box className={classes.like}>
                                         <LikeDislikes />
-                                        {/* <IconButton><ThumbUpIcon/></IconButton>
-                                        <IconButton><ThumbDownIcon  color="secondary"/></IconButton> */}
                                       </Box>
                                     </div>
                                   </div>
@@ -346,7 +397,30 @@ export default function ContentList(props) {
                                 </Grid>
                               </Toolbar>
                               <Grid item xs={12} sm={12}>
-                                <h2>이용정보 </h2>
+                                <Toolbar>
+                                  <h2>이용정보 </h2>
+                                  <div className={classes.arrayMenu}>
+                                    <FormControl
+                                      className={classes.formControl}
+                                    >
+                                      <NativeSelect
+                                        value={state.age}
+                                        onChange={handleChange}
+                                        name="age"
+                                        className={classes.selectEmpty}
+                                        inputProps={{ "aria-label": "age" }}
+                                      >
+                                        <option value="">최신순</option>
+                                        <option value="10">
+                                          조회수 올림차순
+                                        </option>
+                                        <option value="20">
+                                          조회수 내림차순
+                                        </option>
+                                      </NativeSelect>
+                                    </FormControl>
+                                  </div>
+                                </Toolbar>
                                 <TableContainer component={Paper}>
                                   <Table
                                     className={classes.table}
@@ -394,7 +468,7 @@ export default function ContentList(props) {
                                         </TableCell>
                                       </TableRow>
                                     </TableHead>
-                                    <TableBody className={classes.tablebody}>
+                                    <TableBody>
                                       {rows.map((row) => (
                                         <TableRow key={row.name}>
                                           <TableCell align="center">
@@ -430,6 +504,142 @@ export default function ContentList(props) {
                                 <br />
                                 <br />
                               </Grid>
+
+                              {/* 에피소드 리스트 시작 */}
+                              {/* 에피소드를 맵핑해서 인덱스 0 일때 아무것도안나오고 1이상일떄는 리스트를 보여준다 */}
+                              {list.map((l, index) => {
+                                if (list.length === index) {
+                                  return (
+                                    <h4>** 에피소드가 존재하지 않습니다 **</h4>
+                                  );
+                                } else {
+                                  return (
+                                    <div className={classes.episodepage}>
+                                      <Accordion
+                                        //  ****  panel1 의 값이 증가해야 에피소드클릭했을때 한번에 열리지 않고 한개씩 열리게 돱니다 ****
+                                        expanded={expanded === "panel1"}
+                                        onChange={handleChange1("panel1")}
+                                      >
+                                        <AccordionSummary
+                                          expandIcon={
+                                            <ExpandMoreIcon
+                                              className={classes.close}
+                                            />
+                                          }
+                                          aria-controls="panel1bh-content"
+                                          id="panel1bh-header"
+                                          className={classes.episode}
+                                        >
+                                          <Typography
+                                            className={classes.heading}
+                                          >
+                                            {movieDetail.episodeNumvber}
+                                          </Typography>
+                                          <Typography
+                                            className={classes.secondaryHeading}
+                                          >
+                                            {movieDetail.episodeStory}
+                                          </Typography>
+                                        </AccordionSummary>
+                                        <AccordionDetails
+                                          className={classes.episode}
+                                        >
+                                          <Typography>
+                                            <h2>이용정보 </h2>
+                                            <TableContainer component={Paper}>
+                                              <Table
+                                                className={classes.table}
+                                                aria-label="Flat rate"
+                                              >
+                                                <TableHead>
+                                                  <TableRow>
+                                                    <TableCell align="center">
+                                                      <h3 color="white">
+                                                        구매정보
+                                                      </h3>
+                                                    </TableCell>
+                                                    <TableCell align="center">
+                                                      <img
+                                                        className={
+                                                          classes.platformimg
+                                                        }
+                                                        src={Naver}
+                                                        alt="네이버"
+                                                      />
+                                                    </TableCell>
+                                                    <TableCell align="center">
+                                                      <img
+                                                        className={
+                                                          classes.platformimg
+                                                        }
+                                                        src={Google}
+                                                        alt="구글"
+                                                      />
+                                                    </TableCell>
+                                                    <TableCell align="center">
+                                                      <img
+                                                        className={
+                                                          classes.platformimg
+                                                        }
+                                                        src={Wavve}
+                                                        alt="웨이브"
+                                                      />
+                                                    </TableCell>
+                                                    <TableCell align="center">
+                                                      <img
+                                                        className={
+                                                          classes.platformimg
+                                                        }
+                                                        src={Netflix}
+                                                        alt="넷플릭스"
+                                                      />
+                                                    </TableCell>
+                                                    <TableCell align="center">
+                                                      <img
+                                                        className={
+                                                          classes.platformimg
+                                                        }
+                                                        src={Watcha}
+                                                        alt="왓챠"
+                                                      />
+                                                    </TableCell>
+                                                  </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                  {episoderows.map((erow) => (
+                                                    <TableRow key={erow.name}>
+                                                      <TableCell align="center">
+                                                        {erow.구매정보}
+                                                      </TableCell>
+                                                      <TableCell align="center">
+                                                        {erow.naver}
+                                                      </TableCell>
+                                                      <TableCell align="center">
+                                                        {erow.google}
+                                                      </TableCell>
+                                                      <TableCell align="center">
+                                                        {erow.wavve}
+                                                      </TableCell>
+                                                      <TableCell align="center">
+                                                        {erow.netflix}
+                                                      </TableCell>
+                                                      <TableCell align="center">
+                                                        {erow.watcha}
+                                                      </TableCell>
+                                                    </TableRow>
+                                                  ))}
+                                                </TableBody>
+                                              </Table>
+                                            </TableContainer>
+                                          </Typography>
+                                        </AccordionDetails>
+                                      </Accordion>
+                                    </div>
+                                  );
+                                }
+                              })}
+                              {/* 에피소드 종료 */}
+
                               <Grid item xs={12} sm={12}>
                                 <h2>리뷰</h2>
                                 <TextField
@@ -521,12 +731,6 @@ export default function ContentList(props) {
                       </CardActionArea>
                       <Grid>
                         <LikeDislikes />
-                        {/* <IconButton type="button" onClick>
-                          <ThumbUpIcon color="primary"/>
-                        </IconButton>
-                        <IconButton type="button" onClick>
-                          <ThumbDownIcon/>
-                        </IconButton> */}
                       </Grid>
                     </Card>
                   </Grid>
@@ -535,8 +739,7 @@ export default function ContentList(props) {
               }
             })}
             <div>{loading && "잠시만 기다려주세요"}</div>
-            <div>{error && "End"}</div>{" "}
-            {/* 페이징이 모두 끝나게 되면 Loading과 End가 동시에 출력된다 */}
+            <div>{error && "End"}</div>
           </Grid>
         </Container>
       </main>

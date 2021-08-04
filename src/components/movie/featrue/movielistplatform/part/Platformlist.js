@@ -2,20 +2,23 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Button } from "@material-ui/core";
 
-import Google from "../../../../../img/google.jpeg";
-import Naver from "../../../../../img/naver.jpeg";
-import Wavve from "../../../../../img/wavve.jpeg";
-import Netflix from "../../../../../img/netflix.jpeg";
-import Watcha from "../../../../../img/watcha.jpeg";
-import Googleoff from "../../../../../img/googleoff.jpeg";
-import Naveroff from "../../../../../img/naveroff.jpeg";
-import Wavveoff from "../../../../../img/wavveoff.jpeg";
-import Netflixoff from "../../../../../img/netflixoff.jpeg";
-import Watchaoff from "../../../../../img/watchaoff.jpeg";
+import Google from "../../../../../img/platform/on/google.jpeg";
+import Naver from "../../../../../img/platform/on/naver.jpeg";
+import Wavve from "../../../../../img/platform/on/wavve.jpeg";
+import Netflix from "../../../../../img/platform/on/netflix.jpeg";
+import Watcha from "../../../../../img/platform/on/watcha.jpeg";
+
+import Googleoff from "../../../../../img/platform/off/googleoff.jpeg";
+import Naveroff from "../../../../../img/platform/off/naveroff.jpeg";
+import Wavveoff from "../../../../../img/platform/off/wavveoff.jpeg";
+import Netflixoff from "../../../../../img/platform/off/netflixoff.jpeg";
+import Watchaoff from "../../../../../img/platform/off/watchaoff.jpeg";
 
 const useStyles = makeStyles((theme) => ({
     title: {
-      padding: theme.spacing(1),    
+      padding: theme.spacing(1),
+      boxShadow: theme.shadows[5], 
+      borderRadius: "30px" 
     },
     li: {
       float: "left",
@@ -25,8 +28,10 @@ const useStyles = makeStyles((theme) => ({
     img: {
       width: 30,
       [theme.breakpoints.up('sm')]: {
-          width: 50,
+          width: 40,
       },
+      borderRadius: "30px" 
+
     },
   }));
 
@@ -100,10 +105,10 @@ export default function Platformlist() {
     }, [net, wat, goo, nav, wav]);
 
     return (
-        <Grid className={classes.title} >
-        <ul>
+        <Grid className={classes.title}>
+        <ul flexWrap="noWrap">
             <li className={classes.li}>
-                <Button onClick={Click1}>
+                <Button onClick={Click1} >
                     {net ? (
                         <img className={classes.img} src={Netflix} alt="netflix" />
                     ) : (

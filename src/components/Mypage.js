@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import AuthService from "../service/user/AuthService";
+import UserUtils from "../service/user/UserUtils";
 import { Button, Avatar, Tabs, Tab, Box, Typography, Toolbar, AppBar, CssBaseline, Drawer, Modal, Fade, Container, Grid, Backdrop, Card, TextField } from "@material-ui/core";
+import { ACCESS_TOKEN } from "../service/oauth2/OAuth";
 
 const drawerWidth = 150;
 
@@ -10,13 +11,11 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    marginTop: 0,
-    position: "sticky"
+    marginTop: 65,
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
-    position: "sticky"
+    flexShrink: 0
   },
   drawerPaper: {
     width: drawerWidth,
@@ -58,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[15], 
+    boxShadow: theme.shadows[15],
     padding: theme.spacing(2),
     marginWidth: "auto",
     marginHeight: "auto",
@@ -78,6 +77,12 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "15%",
     float: "right",
   },
+  all: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    minHeight: '100vh',
+  }
 }));
 
 function TabPanel(props) {
@@ -119,7 +124,7 @@ export default function Mypage() {
   const [open1, setOpen1] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
   const [open3, setOpen3] = React.useState(false);
-  const currentUser = AuthService.getCurrentUser();
+  const currentUser = UserUtils.getCurrentUser();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -150,7 +155,7 @@ export default function Mypage() {
   };
 
   const logOut = () => {
-      AuthService.logout();
+    localStorage.removeItem(ACCESS_TOKEN);
   };
 
   return (
@@ -227,7 +232,7 @@ export default function Mypage() {
                                 label={currentUser.username}
                                 id="username"
                                 className="form-control"
-                                > 
+                                >
                             </TextField>
                             <h4>아이디</h4>
                             <TextField
@@ -238,7 +243,7 @@ export default function Mypage() {
                                 label={currentUser.username}
                                 id="username"
                                 className="form-control"
-                                > 
+                                >
                             </TextField>
                             <h4>이메일</h4>
                             <TextField
@@ -249,7 +254,7 @@ export default function Mypage() {
                                 label={currentUser.email}
                                 id="username"
                                 className="form-control"
-                                > 
+                                >
                             </TextField>
                             <Grid>
                                 <Button
@@ -260,7 +265,7 @@ export default function Mypage() {
                                 >
                                     수정
                                 </Button>
-                                
+
                                 <Button
                                     type="submit"
                                     variant="contained"
